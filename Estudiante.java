@@ -8,6 +8,7 @@ public class Estudiante {
     private String apellidos;
     private int faltasNoJustificadas;
     private int faltasJustificadas;
+    // private enum TipoApercibimiento = {"DIEZ", "VEINTE", "TREINTA"};
 
     /**
      *  
@@ -17,10 +18,30 @@ public class Estudiante {
      *  
      */
     public Estudiante(String lineaDatos) {
-         
-
+        String[] informacion = lineaDatos.split(SEPARADOR);
+        this.nombre = convertirNombre(informacion[0]);
+        this.apellidos = informacion[1].toUpperCase();
+        this.faltasNoJustificadas = Integer.parseInt(informacion[2]);
+        this.faltasJustificadas = Integer.parseInt(informacion[3]);
     }
 
+    private String convertirNombre(String nombre){
+        String[] nombres = nombre.split(" ");
+        int longitud = nombres.length;
+        String nombreFinal = "";
+        String inicial = "";
+        for(int i = 0; i < longitud; i++){
+            if(i == (longitud - 1)){
+                inicial = String.valueOf(nombres[i].charAt(0));
+                nombreFinal += inicial + nombres[i].substring(0);                
+            }
+            else if(nombres[i] != " "){
+                inicial = String.valueOf(nombres[i].charAt(0));
+                nombreFinal += inicial.toUpperCase() + ". ";
+            }
+        }
+        return nombreFinal;
+    }
 
     /**
      * accesor para el nombre completo
@@ -98,8 +119,7 @@ public class Estudiante {
 
     }
 
-
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Estudiante e1 = new Estudiante("  ander ibai  ,  Ruiz Sena , 12, 23");
         System.out.println(e1);
         System.out.println();
@@ -113,7 +133,6 @@ public class Estudiante {
         Estudiante e4 = new Estudiante("julen, Duque Puyal, 5, 55");
         System.out.println(e4);
         System.out.println();
-        
 
         System.out.println("---------------------------------");
         e1.justificar(3);

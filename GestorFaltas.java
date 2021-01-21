@@ -10,10 +10,11 @@ import java.util.Scanner;
  *
  */
 public class GestorFaltas {
-     
+    private Estudiante[] estudiantes;
+    private int total;
 
     public GestorFaltas(int n) {
-         
+        this.estudiantes = new Estudiante[n];
     }
 
     /**
@@ -21,7 +22,7 @@ public class GestorFaltas {
      * false en otro caso
      */
     public boolean cursoCompleto() {
-        return false;
+        return total == estudiantes.length;
     }
 
     /**
@@ -37,10 +38,13 @@ public class GestorFaltas {
      *    
      */
     public void addEstudiante(Estudiante nuevo) {
-        
-
+        if (total < estudiantes.length){
+            estudiantes[total] = nuevo;
+            total++;
+        }else{
+            System.out.println("Curso completo, no se puede añadir un nuevo estudiante");  
+        }
     }
-
 
     /**
      * buscar un estudiante por sus apellidos
@@ -51,8 +55,12 @@ public class GestorFaltas {
      *  
      */
     public int buscarEstudiante(String apellidos) {
-         
-        return 0;
+        for(int i = 0; i < estudiantes.length; i++){
+            if(estudiantes[i].getNombre().equalsIgnoreCase(apellidos)){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -61,9 +69,8 @@ public class GestorFaltas {
      *  
      */
     public String toString() {
-        
-        return null;
 
+        return null;
     }
 
     /**
@@ -75,7 +82,6 @@ public class GestorFaltas {
      *  justificar también)
      */
     public void justificarFaltas(String apellidos, int faltas) {
-         
 
     }
 
@@ -85,8 +91,17 @@ public class GestorFaltas {
      * Método de selección directa
      */
     public void ordenar() {
-        
-
+        // for (int i = 0; i < estudiantes.length - 1; i++) {
+        // int posmin = i;
+        // for (int j = i + 1; j < estudiantes.length; j++) {
+        // if (estudiantes[j] < estudiantes[posmin]) {
+        // posmin = j;
+        // }
+        // }
+        // int aux = estudiantes[posmin];
+        // estudiantes[posmin] = estudiantes[i];
+        // estudiantes[i] = aux;
+        // }
     }
 
     /**
@@ -94,7 +109,6 @@ public class GestorFaltas {
      * aquellos estudiantes con 30 o más faltas injustificadas
      */
     public void anularMatricula() {
-         
 
     }
 
@@ -105,25 +119,21 @@ public class GestorFaltas {
      */
     public void leerDeFichero() {
         Scanner sc = null;
-        try {
+        try{
             sc = new Scanner(new File("estudiantes.txt"));
-            while (sc.hasNextLine()) {
+            while (sc.hasNextLine()){
                 String linea = sc.nextLine();
                 Estudiante estudiante = new Estudiante(linea);
                 this.addEstudiante(estudiante);
-
             }
-
         }
-        catch (IOException e) {
+        catch (IOException e){
             System.out.println("Error al leer del fichero");
         }
-        finally {
-            if (sc != null) {
+        finally{
+            if (sc != null){
                 sc.close();
             }
         }
-
     }
-
 }
