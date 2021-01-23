@@ -8,7 +8,6 @@ public class Estudiante {
     private String apellidos;
     private int faltasNoJustificadas;
     private int faltasJustificadas;
-    // private enum TipoApercibimiento = {"DIEZ", "VEINTE", "TREINTA"};
 
     /**
      *  
