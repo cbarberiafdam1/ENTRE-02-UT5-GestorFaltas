@@ -39,11 +39,13 @@ public class GestorFaltas {
      */
     public void addEstudiante(Estudiante nuevo) {
         for(int i = 0; i < total; i++){
-            if (total < estudiantes.length && buscarEstudiante(estudiantes[i].getApellidos().)){
+            if (total < estudiantes.length && buscarEstudiante(nuevo.getApellidos()) == -1){
                 estudiantes[total] = nuevo;
                 total++;
-            }else{
+            }else if(total >= estudiantes.length){
                 System.out.println("Curso completo, no se puede añadir un nuevo estudiante");  
+            }else if(buscarEstudiante(nuevo.getApellidos()) == 1){
+                System.out.println("El estudiante se encuentra en el curso");
             }
         }
     }
@@ -71,8 +73,9 @@ public class GestorFaltas {
      *  
      */
     public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-        return null;
+        return sb;
     }
 
     /**
@@ -84,7 +87,16 @@ public class GestorFaltas {
      *  justificar también)
      */
     public void justificarFaltas(String apellidos, int faltas) {
-
+        int faltasJustificadas = 0;
+        int faltasNoJustificadas = 0;
+        for(int i = 0; i < total; i++){
+            if(estudiantes[i].getApellidos() == apellidos){
+                faltasNoJustificadas = estudiantes[i].getFaltasNoJustificadas() - faltas;
+                faltasJustificadas = estudiantes[i].getFaltasJustificadas() + faltas;
+                estudiantes[i].setFaltasNoJustificadas(faltasNoJustificadas);
+                estudiantes[i].setFaltasJustificadas(faltasJustificadas);
+            }
+        }
     }
 
     /**
@@ -96,7 +108,7 @@ public class GestorFaltas {
         for (int i = 0; i < total - 1; i++) {
             int posmin = i;
             for (int j = i + 1; j < total; j++) {
-                if (estudiantes[j] < estudiantes[posmin]) {
+                if (estudiantes[j].getFaltasNoJustificadas() < estudiantes[posmin].getFaltasNoJustificadas()) {
                     posmin = j;
                 }
             }

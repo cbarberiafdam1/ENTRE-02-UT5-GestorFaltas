@@ -8,6 +8,7 @@ public class Estudiante {
     private String apellidos;
     private int faltasNoJustificadas;
     private int faltasJustificadas;
+    private enum TipoApercibimiento {DIEZ, VEINTE, TREINTA};
 
     /**
      *  
@@ -79,7 +80,7 @@ public class Estudiante {
     }
 
     /**
-     * mutador para el nº de faltas no justificadas
+       * mutador para el nº de faltas no justificadas
      */
     public void setFaltasNoJustificadas(int faltasNoJustificadas) {
         this.faltasNoJustificadas = faltasNoJustificadas;
@@ -113,9 +114,9 @@ public class Estudiante {
      * (ver enunciado)
      */
     public String toString() {
-        
-        return null;
-
+        String resultado = String.format("Apellidos y Nombre: %5s, %s\n Faltas No Justificadas: %3s\n Faltas Justificadas: %6s\n Apercibimientos: %9s\n",
+        this.apellidos, this.nombre, this.faltasNoJustificadas, this.faltasJustificadas); 
+        return resultado;
     }
 
     public static void main(String[] args) {
@@ -145,5 +146,4 @@ public class Estudiante {
         System.out.println();
 
     }
-
 }
