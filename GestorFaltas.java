@@ -74,8 +74,10 @@ public class GestorFaltas {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        return sb;
+        for(int i = 0; i < total; i++){
+            sb.append("");
+        }
+        return sb.toString();
     }
 
     /**

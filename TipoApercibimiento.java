@@ -7,5 +7,16 @@
  */
 public enum TipoApercibimiento
 {
-    DIEZ, VEINTE, TREINTA;
+    DIEZ(10), 
+    VEINTE(20), 
+    TREINTA(30);
+    private int apercibimientos;    
+    
+    private TipoApercibimiento(int apercibimientos){
+        this.apercibimientos = apercibimientos;
+    }
+    
+    public int getApercibimientos(){
+        return apercibimientos;
+    }   
 }
